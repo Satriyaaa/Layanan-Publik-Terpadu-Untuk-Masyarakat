@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LOGIN</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <style>
+        /* Toast Styles */
+        .toast {
+            visibility: hidden; /* Hidden by default. Visible on click */
+            min-width: 250px; /* Min width */
+            margin-left: -125px; /* Center the toast */
+            background-color: #333; /* Black background color */
+            color: #fff; /* White text color */
+            text-align: center; /* Centered text */
+            border-radius: 2px; /* Rounded corners */
+            padding: 16px; /* Padding */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 50%; /* Center the toast horizontally */
+            top: 20px; /* 20px from the top */
+            font-size: 17px; /* Font size */
+            transition: visibility 0s, opacity 0.5s linear; /* Fade in and out */
+            opacity: 0; /* Initial opacity */
+        }
+
+        .toast.show {
+            visibility: visible; /* Show the toast */
+            opacity: 1; /* Fade in the toast */
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var username = document.forms["loginForm"]["username"].value;
+            var password = document.forms["loginForm"]["password"].value;
+            var toast = document.getElementById("toast");
+
+            if (username == "" || password == "") {
+                toast.textContent = "Username dan Password harus diisi!";
+                showToast();
+                return false; // Mencegah form dari pengiriman jika tidak valid
+            } else {
+                // Jika semua field valid, arahkan ke halaman dashboard.html
+                window.location.href = "dashboard.html";
+                return false; // Mencegah pengiriman form, karena kita sudah melakukan redirect
+            }
+        }
+
+        function showToast() {
+            var toast = document.getElementById("toast");
+            toast.className = "toast show"; // Add the "show" class to DIV
+            setTimeout(function() { toast.className = toast.className.replace("show", ""); }, 3000); // After 3 seconds, remove the show class
+        }
+    </script>
+</head>
+<body>
+ 
+    <h1>LOGIN<br/> LAYANAN TERPADU<br/> UNTUK MASYARAKAT</h1>
+ 
+    <div class="kotak_login">
+        <p class="tulisan_login">Silahkan login</p>
+ 
+        <form name="loginForm" onsubmit="return validateForm()">
+            <label>Username</label>
+            <input type="text" name="username" class="form_login" placeholder="Username atau email ..">
+ 
+            <label>Password</label>
+            <input type="password" name="password" class="form_login" placeholder="Password ..">
+            
+            <button type="submit" class="tombol_login">Login</button>
+        </form>
+        <p class="link">Belum punya akun? <a href="register.html">Daftar di sini</a></p>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast"></div>
+ 
+</body>
+</html>
